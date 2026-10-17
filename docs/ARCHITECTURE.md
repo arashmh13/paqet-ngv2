@@ -70,8 +70,8 @@ sequenceDiagram
     C->>C: authenticate reply, dedupe replay domain, apply bootstrap
 ```
 
-- `EmergencyMessage.Validate()` (**[transport/dns_emergency.go](…)**): schema-strict, unknown types rejected, payload ≤ `MaxEmergencyPayloadBytes`, opaque bytes (never executed or interpreted).
-- Credential loading goes through the CLI loader ([`cmd/emergency/emergency.go`](…) `loadAuthorizedServersConfig`): deep-cloned secrets, strict JSON schema, several fail-closed file policies.
+- `EmergencyMessage.Validate()` (in `internal/ng/transport/dns_emergency.go`): schema-strict, unknown types rejected, payload ≤ `MaxEmergencyPayloadBytes`, opaque bytes (never executed or interpreted).
+- Credential loading goes through the CLI loader (`loadAuthorizedServersConfig` in `cmd/emergency/emergency.go`): deep-cloned secrets, strict JSON schema, several fail-closed file policies.
 - Message-safety classes are explicit (`MessageTypeSafety`): read-only / idempotent / state-changing / unsupported.
 - Restart behavior: in-memory sessions/reply caches are transient; safe-class handlers tolerate re-execution after restart (tested, see [TESTING.md](TESTING.md)).
 

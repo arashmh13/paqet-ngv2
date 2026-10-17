@@ -11,6 +11,8 @@
 | CLI path | real `--authorized-servers-config` loader, atomic replacement, rotation, legacy-frame rejection | `go test ./cmd/emergency/...` | `phase19_client_config_test.go`, `phase20_cli_rotation_test.go` |
 | Failure-lab (simulated) | port-block via local iptables in lab scripts (explicitly operator-run, not a Go test) | manual | scripts/phase13–17 |
 
+The Phase 13–17 failure-laboratory scripts reconstruct blocked-network experiments; they are integration stages, not automated regression tests.
+
 ## Standard commands (verified during this migration)
 
 ```bash

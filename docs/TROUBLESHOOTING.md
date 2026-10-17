@@ -74,4 +74,4 @@ Check (in order): port actually bound (`ss -ulnp | grep 5399`), both sides use t
 
 ## When everything fails
 
-Open an issue with: `paqet version`, the failing command, sanitized log tail (no keys!), and the exact config file **commented out of secrets**; reproduce against the example fixtures if the diff is non-trivial ([CONTRIBUTING.md](CONTRIBUTING.md)).
+Open an issue with: `paqet version`, the failing command, sanitized log tail (no keys!), and the exact config file **commented out of secrets**; reproduce against the example fixtures if the diff is non-trivial ([../CONTRIBUTING.md](../CONTRIBUTING.md)).
