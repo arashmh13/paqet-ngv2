@@ -7,7 +7,7 @@ require (
 	github.com/gopacket/gopacket v1.7.1
 	github.com/spf13/cobra v1.10.2
 	github.com/xtaci/kcp-go/v5 v5.6.72
-	github.com/xtaci/smux v1.5.53
+	github.com/xtaci/smux v2.0.1+incompatible
 	golang.org/x/crypto v0.57.0
 	golang.org/x/net v0.58.0
 )
