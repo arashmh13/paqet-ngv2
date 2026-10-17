@@ -14,6 +14,10 @@ All notable changes to Paqet-NGV2 are documented here. Format based on [Keep a C
 - **Default delegated domain placeholder** in emergency CLI flags: a personal production domain is replaced by `tunnel.paqet-ngv2.example` (safe RFC 2606 placeholder). Operators configure `--domain` explicitly. Wire behavior unchanged (domain is configuration, not protocol).
 - **Environment scrubbing (privacy):** internal research documents, production IPs, hostnames, tokens, and infrastructure run records were **not imported** into this public repository. Source code comments/test fixtures now use reserved documentation IP ranges (TEST-NET-1/2/3). No functional code change.
 - Internal `gofmt` cleanups in `internal/conf/conf.go`, `internal/ng/transport/sni_assisted.go` (formatting only).
+- **Doc accuracy fixes** found by cross-checking the built CLI: the real v4 flag is `--protocol-v` (value `v4`), not `--protocol-v4` as the parse-era draft had it. All documented flags were diffed against `--help` output of the built binary.
+
+### Note on version strings
+- `paqet version` still reports the inherited upstream build identifier (`v1.0.0-alpha.21` with `unknown` tag/commit). No tags exist in this repository yet, so the reported values are unchanged; a first tagged release here would wire its own tag instead of inheriting upstream's.
 
 ### Compatibility
 - Protocol generation compatibility matrix: [docs/PROTOCOLS.md](docs/PROTOCOLS.md#compatibility-matrix).

@@ -80,9 +80,9 @@ The authoritative, fully commented fixture set is [`example/client.yaml.example`
 | `--legacy-single-server` | bool | no | off | single-server PSK-only legacy mode; mutually exclusive with multi-server flags |
 | `--server-id` | string | multi-server | — | canonical identity (`[a-z0-9._-]{3,64}`; `default`/`legacy` reserved) |
 | `--server-secret-file` | string | multi-server | — | dedicated 32-byte response secret **file**; symlinks rejected, ≤0640 perms required, exactly 32 bytes |
-| `--protocol-v4` | bool | no | off | v4 "PAQD" framing (per-session seed + per-server-session nonce/key base) |
+| `--protocol-v` | string | no | off | value `v4`: v4 "PAQD" framing (per-session seed + per-server-session nonce/key base) |
 | `--disable-bootstrap` | bool | no | — | messaging-only: emits no bootstrap candidates (fail-closed default state) |
-| `--bootstrap-ip` / `--bootstrap-port` / `--bootstrap-mode` | | conditional | —端口 `18089`, mode `aead-stream` | candidate advertisement when bootstrap is enabled |
+| `--bootstrap-ip` / `--bootstrap-port` / `--bootstrap-mode` | | conditional | — | port `18089`, mode `aead-stream`; candidate advertisement when bootstrap is enabled |
 | `--bootstrap-key-file` / `--bootstrap-cert` | string | conditional | — | fingerprint source (`SHA256:<hex>` pins) |
 | `--bootstrap-pin` | string | no | — | explicit pin overriding computed fingerprint |
 | `--bootstrap-config` | string | no | — | JSON file of multiple candidates (see fixture) |
@@ -99,7 +99,7 @@ Validation highlights (implemented in `dns_emergency.go`): port range checks, st
 | `--legacy-single-server` | bool | no | off | legacy mode |
 | `--server-id` + `--server-secret-file` | | convenience | — | single named server |
 | `--authorized-servers-config` | string | multi-server | — | JSON: `version`(=1), `protocol`(`"v4"`), `generation`, `authorized_servers[{server_id, secret_file}]`; parser rejects inline secrets, missing/short files, symlinked files, dupes, reserved IDs, **and any ambiguous flag combination** |
-| `--protocol-v4` (send) | — use config | | | protocol selection comes from `authorized-servers-config` (`protocol: "v4"`) |
+| `--protocol-v` (send) | — use config | | | protocol selection comes from `authorized-servers-config` (`protocol: "v4"`) |
 | `--client-id` | string | no | `c01` | max 4 chars |
 | `-m/--message` | string | no | `EMERGENCY_PING` | application payload |
 | `--timeout` | int | no | 5 | seconds |
@@ -112,7 +112,7 @@ Validation highlights (implemented in `dns_emergency.go`): port range checks, st
 
 ## 3. Other subcommands
 
-- `paqet secret` — prints a fresh random 32-byte hex key. nothing else.
+- `paqet secret` — prints a fresh random 32-byte hex key. Nothing else.
 - `paqet version`, `paqet ping [--config, --payload]`, `paqet dump [--config]` — as `--help` output.
 
 ## 4. Environment variables
