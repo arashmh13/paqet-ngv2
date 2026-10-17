@@ -8,6 +8,10 @@ on:
 permissions:
   contents: read
 
+env:
+  # gopacket/pcap is a cgo binding: the raw-packet data plane needs libpcap headers.
+  PCAP_DEPS: libpcap-dev
+
 jobs:
   lint:
     name: gofmt & vet
@@ -16,6 +20,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4.2.2
+
+      - name: Install libpcap (cgo dependency of gopacket)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends $PCAP_DEPS
 
       - name: Set up Go
         uses: actions/setup-go@v5.3.0
@@ -42,6 +51,12 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4.2.2
+
+      - name: Install libpcap (cgo dependency of gopacket)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends $PCAP_DEPS
+
       - uses: actions/setup-go@v5.3.0
         with:
           go-version: '1.27'
@@ -61,6 +76,12 @@ jobs:
     needs: [lint]
     steps:
       - uses: actions/checkout@v4.2.2
+
+      - name: Install libpcap (cgo dependency of gopacket)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends $PCAP_DEPS
+
       - uses: actions/setup-go@v5.3.0
         with:
           go-version: '1.27'
