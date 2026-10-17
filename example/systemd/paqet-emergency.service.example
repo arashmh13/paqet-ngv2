@@ -1,0 +1,27 @@
+[Unit]
+Description=Paqet-NG Authoritative Emergency DNS Control Plane
+After=network.target
+
+[Service]
+Type=simple
+User=root
+# Explicit configuration: Fail-closed architecture prohibits implicit server IDs,
+# implicit secrets, or shared-PSK response fallbacks.
+# Production multi-authoritative mode strictly requires --server-id and --server-secret-file (32 bytes).
+ExecStart=/opt/paqet/paqet emergency server \
+    --addr 0.0.0.0:53 \
+    --domain tunnel.paqet-ngv2.example \
+    --key-file /opt/paqet/emergency.key \
+    --server-id ns-de-01 \
+    --server-secret-file /opt/paqet/server_de_01.secret \
+    --bootstrap-config /opt/paqet/bootstrap-candidates.json
+# Note: Legacy single-server setups require explicit --legacy-single-server flag
+# and are not eligible for multi-authoritative deployment.
+Restart=always
+RestartSec=3
+LimitNOFILE=65535
+ProtectSystem=full
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target

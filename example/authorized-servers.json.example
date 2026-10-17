@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "protocol": "v4",
+  "generation": 1,
+  "authorized_servers": [
+    {
+      "server_id": "ns-de-01",
+      "secret_file": "/opt/paqet/secrets/ns-de-01.key"
+    },
+    {
+      "server_id": "ns-nl-01",
+      "secret_file": "/opt/paqet/secrets/ns-nl-01.key"
+    }
+  ]
+}

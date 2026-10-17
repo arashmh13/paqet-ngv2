@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: gofmt & vet
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+
+      - name: Set up Go
+        uses: actions/setup-go@v5.3.0
+        with:
+          go-version: '1.27'          # matches go.mod directive
+          check-latest: true
+          cache: true
+
+      - name: gofmt check
+        run: |
+          fmt_out=$(gofmt -l .)
+          if [ -n "$fmt_out" ]; then
+            echo "gofmt needed on:" 2>&1
+            echo "$fmt_out"
+            exit 1
+          fi
+
+      - name: go vet
+        run: go vet ./...
+
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - uses: actions/setup-go@v5.3.0
+        with:
+          go-version: '1.27'
+          check-latest: true
+          cache: true
+
+      - name: go test -count=1 ./...
+        run: go test -count=1 ./...
+
+      - name: go test -race ./...
+        run: go test -race ./...
+
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: [lint]
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - uses: actions/setup-go@v5.3.0
+        with:
+          go-version: '1.27'
+          check-latest: true
+          cache: true
+
+      - name: go build ./...
+        run: go build ./...
+
+      - name: Build CLI artifact
+        run: go build -o bin/paqet ./cmd
+
+      - name: CLI smoke check
+        run: |
+          ./bin/paqet --help
+          ./bin/paqet version
