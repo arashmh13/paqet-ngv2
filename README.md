@@ -4,7 +4,7 @@ An experimental multi-transport resilience and authenticated DNS recovery layer 
 
 [![Go](https://img.shields.io/badge/go-1.27%2B-00ADD8)](https://go.dev)
 [![License: MIT](https://img.shields.io/badge/license-MIT-yellow)](LICENSE)
-[![CI](https://img.shields.io/badge/CI-tests%20%2B%20race-blue)](docs/TESTING.md)
+[![CI](https://github.com/arashmh13/paqet-ngv2/actions/workflows/ci.yml/badge.svg)](https://github.com/arashmh13/paqet-ngv2/actions/workflows/ci.yml)
 
 > [!WARNING]
 > **Experimental research project.** Paqet-NGV2 is a derivative of [hanselime/paqet](https://github.com/hanselime/paqet) (MIT). The base packet tunnel is mature for its scope; the resilience, DNS-recovery and v4 cryptography layers added here are **not** independently audited and are **not** proven to bypass any specific filtering system. See [docs/SECURITY.md](docs/SECURITY.md) and [UPSTREAM.md](UPSTREAM.md).
@@ -73,6 +73,25 @@ go build -o bin/paqet ./cmd
 
 Full walkthrough — a minimal tunnel first, then the optional emergency layer: [docs/QUICKSTART.md](docs/QUICKSTART.md).
 Platform prerequisites and privileges: [docs/INSTALLATION.md](docs/INSTALLATION.md).
+
+## Documentation
+
+| Document | Contents |
+| --- | --- |
+| [docs/INSTALLATION.md](docs/INSTALLATION.md) | prerequisites, build, service user, capabilities |
+| [docs/QUICKSTART.md](docs/QUICKSTART.md) | minimal tunnel, then the emergency DNS layer |
+| [docs/CONFIGURATION.md](docs/CONFIGURATION.md) | full YAML/CLI reference |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | source tree, data/control planes, recovery state machine |
+| [docs/PROTOCOLS.md](docs/PROTOCOLS.md) | wire format per generation, compatibility matrix, collision bounds |
+| [docs/DNS-RECOVERY.md](docs/DNS-RECOVERY.md) | emergency channel design and trust model |
+| [docs/SECURITY.md](docs/SECURITY.md) | threat model, credential hygiene, logging policy |
+| [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) | systemd units and hardening |
+| [docs/TESTING.md](docs/TESTING.md) | test taxonomy and exact commands |
+| [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | real failure modes, in order of likelihood |
+| [UPSTREAM.md](UPSTREAM.md) | provenance, attribution, authorship split |
+| [docs/PUBLICATION-AUDIT.md](docs/PUBLICATION-AUDIT.md) | exactly how this repository was created, what was excluded and why |
+| [CHANGELOG.md](CHANGELOG.md) | changes relative to the source development branch |
+| [SECURITY.md](SECURITY.md) | how to report a vulnerability |
 
 ## Build & test
 
